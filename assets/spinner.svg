@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="48" height="48" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <!-- Official GenLayer gradient: pink → purple → Kinetic Cobalt -->
+    <linearGradient id="gl-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E37DF7"/>
+      <stop offset="45%" stop-color="#9B6AF6"/>
+      <stop offset="100%" stop-color="#110FFF"/>
+    </linearGradient>
+    <style>
+      .gl-rotate {
+        transform-origin: 32px 32px;
+        animation: gl-rotate 1.6s linear infinite;
+      }
+      .gl-arc {
+        stroke: url(#gl-grad);
+        stroke-width: 3;
+        stroke-linecap: round;
+        fill: none;
+        stroke-dasharray: 1 150;
+        stroke-dashoffset: 0;
+        animation: gl-dash 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      }
+      .gl-track {
+        stroke: currentColor;
+        stroke-width: 3;
+        fill: none;
+        opacity: 0.12;
+      }
+      .gl-node {
+        fill: #110FFF;
+        animation: gl-pulse 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+      }
+      .gl-node:nth-child(1) { animation-delay: 0s;     transform-origin: 32px 8px; }
+      .gl-node:nth-child(2) { animation-delay: -0.32s; transform-origin: 52.2px 22.1px; }
+      .gl-node:nth-child(3) { animation-delay: -0.64s; transform-origin: 44.5px 46.9px; }
+      .gl-node:nth-child(4) { animation-delay: -0.96s; transform-origin: 19.5px 46.9px; }
+      .gl-node:nth-child(5) { animation-delay: -1.28s; transform-origin: 11.8px 22.1px; }
+
+      @keyframes gl-rotate {
+        to { transform: rotate(360deg); }
+      }
+      @keyframes gl-dash {
+        0%   { stroke-dasharray: 1 150;  stroke-dashoffset: 0; }
+        40%  { stroke-dasharray: 80 150; stroke-dashoffset: -30; }
+        100% { stroke-dasharray: 80 150; stroke-dashoffset: -140; }
+      }
+      @keyframes gl-pulse {
+        0%   { opacity: 0.2; transform: scale(0.8); }
+        20%  { opacity: 1;   transform: scale(1.2); }
+        40%, 100% { opacity: 0.25; transform: scale(0.85); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .gl-rotate, .gl-arc, .gl-node {
+          animation: none !important;
+        }
+        .gl-arc { stroke-dasharray: 60 150; opacity: 0.7; }
+        .gl-node { opacity: 0.6; }
+      }
+    </style>
+  </defs>
+
+  <!-- Subtle track for visibility on both light & dark surfaces -->
+  <circle class="gl-track" cx="32" cy="32" r="24"/>
+
+  <!-- Rotating group: arc + leading node accent -->
+  <g class="gl-rotate">
+    <circle class="gl-arc" cx="32" cy="32" r="24"/>
+  </g>
+
+  <!-- 5 Validator nodes (Optimistic Democracy starting set) -->
+  <g>
+    <circle class="gl-node" cx="32"   cy="8"    r="2.6"/>
+    <circle class="gl-node" cx="52.2" cy="22.1"  r="2.6"/>
+    <circle class="gl-node" cx="44.5" cy="46.9"  r="2.6"/>
+    <circle class="gl-node" cx="19.5" cy="46.9"  r="2.6"/>
+    <circle class="gl-node" cx="11.8" cy="22.1"  r="2.6"/>
+  </g>
+
+  <!-- Official GenLayer Strong Mark — STATIC (brand rule) -->
+  <g transform="translate(20.8, 18.8) scale(0.235)" fill="#110FFF">
+    <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+    <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+    <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+  </g>
+</svg>

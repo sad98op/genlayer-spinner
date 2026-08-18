@@ -1,0 +1,134 @@
+/* ============================================================
+   GenLayer Portal Spinner — Optimistic Democracy
+   Official Strong Mark (static) + 5 validator nodes +
+   smooth Material-style consensus arc.
+   Pure CSS + SVG. Zero JS required for animation.
+   ============================================================ */
+
+:root {
+  --gl-blue: #110FFF;
+  --gl-pink: #E37DF7;
+  --gl-purple: #9B6AF6;
+  --gl-black: #070707;
+  --gl-white: #FFFFFF;
+  --gl-ceramic: #F5F5F5;
+  --gl-asphalt: #606060;
+
+  --gl-spinner-size: 48px;
+  --gl-spinner-duration: 1.6s;
+}
+
+/* ---------- Core ---------- */
+.gl-spinner {
+  width: var(--gl-spinner-size);
+  height: var(--gl-spinner-size);
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  color: var(--gl-blue);
+  flex-shrink: 0;
+}
+
+.gl-spinner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Static central mark — never rotates (brand rule) */
+.gl-spinner__mark {
+  transform-origin: 50% 50%;
+  transform: translateY(2%);
+}
+
+/* Soft track for contrast on any background */
+.gl-spinner__track {
+  opacity: 0.12;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* Rotating wrapper for the arc */
+.gl-spinner__rotate {
+  transform-origin: 50% 50%;
+  animation: gl-rotate var(--gl-spinner-duration) linear infinite;
+}
+
+/* Smooth stretching arc (Material-style dash) */
+.gl-spinner__arc {
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 1 150;
+  stroke-dashoffset: 0;
+  animation: gl-dash 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Validator nodes */
+.gl-spinner__node {
+  animation: gl-pulse var(--gl-spinner-duration) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+.gl-spinner__node:nth-child(1) { animation-delay: 0s;     transform-origin: 32px 8px; }
+.gl-spinner__node:nth-child(2) { animation-delay: -0.32s; transform-origin: 52.2px 22.1px; }
+.gl-spinner__node:nth-child(3) { animation-delay: -0.64s; transform-origin: 44.5px 46.9px; }
+.gl-spinner__node:nth-child(4) { animation-delay: -0.96s; transform-origin: 19.5px 46.9px; }
+.gl-spinner__node:nth-child(5) { animation-delay: -1.28s; transform-origin: 11.8px 22.1px; }
+
+/* ---------- Sizes ---------- */
+.gl-spinner--xs  { --gl-spinner-size: 16px; }
+.gl-spinner--sm  { --gl-spinner-size: 24px; }
+.gl-spinner--md  { --gl-spinner-size: 32px; }
+.gl-spinner--lg  { --gl-spinner-size: 48px; }
+.gl-spinner--xl  { --gl-spinner-size: 64px; }
+.gl-spinner--2xl { --gl-spinner-size: 96px; }
+
+/* ---------- Themes ---------- */
+.gl-spinner--brand    { color: var(--gl-blue); }
+.gl-spinner--on-dark  { color: var(--gl-white); }
+.gl-spinner--on-light { color: var(--gl-blue); }
+.gl-spinner--muted    { color: var(--gl-asphalt); opacity: 0.85; }
+
+/* ---------- Keyframes ---------- */
+@keyframes gl-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gl-dash {
+  0%   { stroke-dasharray: 1 150;  stroke-dashoffset: 0; }
+  40%  { stroke-dasharray: 80 150; stroke-dashoffset: -30; }
+  100% { stroke-dasharray: 80 150; stroke-dashoffset: -140; }
+}
+
+@keyframes gl-pulse {
+  0%   { opacity: 0.2; transform: scale(0.8); }
+  20%  { opacity: 1;   transform: scale(1.2); }
+  40%, 100% { opacity: 0.25; transform: scale(0.85); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .gl-spinner__rotate,
+  .gl-spinner__arc,
+  .gl-spinner__node {
+    animation: none !important;
+  }
+  .gl-spinner__arc  { stroke-dasharray: 60 150; opacity: 0.7; }
+  .gl-spinner__node { opacity: 0.6; }
+}
+
+/* ---------- Accessibility ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gl-spinner[aria-hidden="true"] {
+  /* decorative only */
+}

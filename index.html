@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GenLayer Spinner — Optimistic Democracy</title>
+  <link rel="stylesheet" href="css/spinner.css" />
+  <link rel="stylesheet" href="css/demo.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="badge">Original · Community Design</div>
+      <h1>GenLayer Spinner</h1>
+      <p>
+        Animated loading indicator for the GenLayer Portal.
+        Built around the official Strong Mark and the concept of
+        <strong>Optimistic Democracy</strong> — five validator nodes
+        reaching consensus around a static central mark.
+      </p>
+    </header>
+
+    <section>
+      <h2>Live preview</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="gl-spinner gl-spinner--xs gl-spinner--brand" aria-hidden="true"></div>
+          <span>16px · xs</span>
+        </div>
+        <div class="card">
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span>24px · sm</span>
+        </div>
+        <div class="card">
+          <div class="gl-spinner gl-spinner--md gl-spinner--brand" aria-hidden="true"></div>
+          <span>32px · md</span>
+        </div>
+        <div class="card">
+          <div class="gl-spinner gl-spinner--lg gl-spinner--brand" aria-hidden="true"></div>
+          <span>48px · lg</span>
+        </div>
+        <div class="card">
+          <div class="gl-spinner gl-spinner--xl gl-spinner--brand" aria-hidden="true"></div>
+          <span>64px · xl</span>
+        </div>
+        <div class="card">
+          <div class="gl-spinner gl-spinner--2xl gl-spinner--brand" aria-hidden="true"></div>
+          <span>96px · 2xl</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>On dark & light surfaces</h2>
+      <div class="row" style="gap: 24px;">
+        <div class="surface-dark" style="flex:1; min-width:240px;">
+          <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--on-dark" aria-hidden="true"></div>
+              <span>on-dark</span>
+            </div>
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--brand" aria-hidden="true"></div>
+              <span>brand blue</span>
+            </div>
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--muted" aria-hidden="true"></div>
+              <span>muted</span>
+            </div>
+          </div>
+        </div>
+        <div class="surface-light" style="flex:1; min-width:240px;">
+          <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--on-light" aria-hidden="true"></div>
+              <span>on-light</span>
+            </div>
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--brand" aria-hidden="true"></div>
+              <span>brand blue</span>
+            </div>
+            <div class="card">
+              <div class="gl-spinner gl-spinner--lg gl-spinner--muted" aria-hidden="true"></div>
+              <span>muted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Design concept</h2>
+      <ul class="usage-list">
+        <li>
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span><strong>5 nodes</strong> — the first validator set in Optimistic Democracy</span>
+        </li>
+        <li>
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span><strong>Static Strong Mark</strong> — follows brand guideline (never rotate the mark)</span>
+        </li>
+        <li>
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span><strong>Traveling pulse</strong> — soft consensus arc rotating around the ring</span>
+        </li>
+        <li>
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span><strong>Kinetic Cobalt + gradient</strong> — official brand colors only</span>
+        </li>
+        <li>
+          <div class="gl-spinner gl-spinner--sm gl-spinner--brand" aria-hidden="true"></div>
+          <span><strong>Pure CSS</strong> — no JavaScript, works offline, respects reduced-motion</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommended accessible usage</h2>
+      <pre><code><!-- 1. Include the CSS once -->
+<link rel="stylesheet" href="css/spinner.css" />
+
+<!-- Visually visible spinner (decorative) -->
+<div class="gl-spinner gl-spinner--md gl-spinner--brand" aria-hidden="true">
+  <!-- inline SVG or <img src="spinner.svg" alt=""> -->
+  <svg width="48" height="48" aria-hidden="true" focusable="false">...</svg>
+</div>
+
+<!-- Hidden live region used to announce state changes to assistive tech -->
+<div id="gl-spinner-status" class="sr-only" aria-live="polite" role="status"></div>
+
+<!-- Size classes: --xs --sm --md --lg --xl --2xl -->
+<!-- Theme classes: --brand --on-dark --on-light --muted --></code></pre>
+    </section>
+
+    <section>
+      <h2>Standalone SVG (copy-paste ready)</h2>
+      <p style="color:var(--muted); font-size:0.9rem; margin-bottom:12px;">
+        The full animated SVG is self-contained. You can also use it as a single file.
+      </p>
+      <pre><code id="svg-source"></code></pre>
+    </section>
+
+    <footer>
+      <p>
+        Designed for the GenLayer Portal · Original concept · Not a duplicate of existing community submissions.<br />
+        Colors & mark follow the official GenLayer Design System.
+      </p>
+    </footer>
+  </div>
+
+  <template id="gl-spinner-svg">
+    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="gl-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#E37DF7"/>
+          <stop offset="45%" stop-color="#9B6AF6"/>
+          <stop offset="100%" stop-color="#110FFF"/>
+        </linearGradient>
+      </defs>
+
+      <circle class="gl-spinner__track" cx="32" cy="32" r="24"
+              stroke="currentColor" stroke-width="3" fill="none"/>
+
+      <g class="gl-spinner__rotate">
+        <circle class="gl-spinner__arc" cx="32" cy="32" r="24"
+                stroke="url(#gl-gradient)" stroke-width="3"
+                fill="none" stroke-linecap="round"/>
+      </g>
+
+      <g class="gl-spinner__nodes">
+        <circle class="gl-spinner__node" cx="32"   cy="8"    r="2.6" fill="currentColor"/>
+        <circle class="gl-spinner__node" cx="52.2" cy="22.1"  r="2.6" fill="currentColor"/>
+        <circle class="gl-spinner__node" cx="44.5" cy="46.9"  r="2.6" fill="currentColor"/>
+        <circle class="gl-spinner__node" cx="19.5" cy="46.9"  r="2.6" fill="currentColor"/>
+        <circle class="gl-spinner__node" cx="11.8" cy="22.1"  r="2.6" fill="currentColor"/>
+      </g>
+
+      <g class="gl-spinner__mark" transform="translate(20.8, 18.8) scale(0.235)" fill="currentColor">
+        <polygon points="44.26 32.35 27.72 67.12 43.29 74.9 0 91.93 44.26 0 44.26 32.35"/>
+        <polygon points="53.5 32.35 70.04 67.12 54.47 74.9 97.76 91.93 53.5 0 53.5 32.35"/>
+        <polygon points="48.64 43.78 58.33 62.94 48.64 67.69 39.47 62.92 48.64 43.78"/>
+      </g>
+    </svg>
+  </template>
+
+  <script>
+    (function () {
+      const tpl = document.getElementById('gl-spinner-svg');
+      if (!tpl) return;
+
+      document.querySelectorAll('.gl-spinner').forEach((el) => {
+        if (el.querySelector('svg')) return;
+        const clone = tpl.content.cloneNode(true);
+        const uid = 'g' + Math.random().toString(36).slice(2, 8);
+        clone.querySelectorAll('[id]').forEach((node) => {
+          const oldId = node.id;
+          node.id = oldId + '-' + uid;
+        });
+        clone.querySelectorAll('[stroke*="url(#"]').forEach((node) => {
+          const s = node.getAttribute('stroke');
+          node.setAttribute('stroke', s.replace(/url\(#([^)]+)\)/, (_, id) => `url(#${id}-${uid})`));
+        });
+        el.appendChild(clone);
+      });
+
+      const sourceEl = document.getElementById('svg-source');
+      if (sourceEl) {
+        const raw = tpl.innerHTML.trim()
+          .replace(/</g, '<')
+          .replace(/>/g, '>');
+        sourceEl.innerHTML = raw;
+      }
+    })();
+  </script>
+</body>
+</html>
